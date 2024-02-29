@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var mySwitch: UISwitch!
+    @IBOutlet var myLabel: UILabel!
     var whichStyle: UIAlertController.Style = .alert
     
     override func viewDidLoad() {
@@ -24,12 +25,23 @@ class ViewController: UIViewController {
             whichStyle = .actionSheet
         }
         
-        let alert = UIAlertController(title: "Warning", message: "Do you really want to delete this message?", preferredStyle: whichStyle)
+        let alert = UIAlertController(title: "Warning", message: "Zombies are loose!", preferredStyle: whichStyle)
         
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: { action -> Void in
-            //Just dismiss the action sheet
+        let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: { action -> Void in
+            self.myLabel.text = "OK"
         })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+            self.myLabel.text = "Cancel"
+        })
+        
+        let destroyAction = UIAlertAction(title: "Destroy", style: .destructive, handler: { action -> Void in
+            self.myLabel.text = "Destroy"
+        })
+        
         alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.addAction(destroyAction)
         
         self.present(alert, animated: true, completion: nil)
     }
